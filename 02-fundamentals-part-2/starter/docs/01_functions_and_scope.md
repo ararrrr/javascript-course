@@ -1,5 +1,5 @@
 ## 🎯 What You'll Learn Today
-
+ 
 By the end of this hour, you'll be able to:
 
 - Create function declarations and expressions
