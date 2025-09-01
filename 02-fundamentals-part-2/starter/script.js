@@ -198,25 +198,221 @@
 // console.log(`${passedCount} out of ${grades2.length} students passed`);
 
 
-const grades = [78, 85, 92, 67, 88, 95, 73, 82];
-let sum = 0;
-for (let i = 0; i < grades.length; i++) {
-    sum += grades[i];
-} 
+// const grades = [78, 85, 92, 67, 88, 95, 73, 82];
+// let sum = 0;
+// for (let i = 0; i < grades.length; i++) {
+//     sum += grades[i];
+// } 
 
-    const average = sum / grades.length;
-    console.log(`Average grade: ${average.toFixed(2)}`);
+//     const average = sum / grades.length;
+//     console.log(`Average grade: ${average.toFixed(2)}`);
 
-    const highestGrade = Math.max(...grades);
-    console.log(`The highest grade is ${highestGrade}`);
+//     const highestGrade = Math.max(...grades);
+//     console.log(`The highest grade is ${highestGrade}`);
 
-    const lowestGrade = Math.min(...grades);
-    console.log(`The lowest grade is ${lowestGrade}`);
+//     const lowestGrade = Math.min(...grades);
+//     console.log(`The lowest grade is ${lowestGrade}`);
 
-    let passedCount = 0;
-    grades.forEach(
-        grade => {
-        if (grade >= 70) passedCount++;
-    });
-    console.log(`${passedCount} out of ${grades.length} students passed`);
+//     let passedCount = 0;
+//     grades.forEach(
+//         grade => {
+//         if (grade >= 70) passedCount++;
+//     });
+//     console.log(`${passedCount} out of ${grades.length} students passed`);
+
+
+////////////////////////////////////
+// // The Array Problem
+// const jonasArray = [
+//   "Jonas",
+//   "Schmedtmann",
+//   2037 - 1991,
+//   "teacher",
+//   ["Michael", "Peter", "Steven"],
+// ];
+
+// console.log(jonasArray[0]);
+// console.log(jonasArray[1]);
+
+// const jonas = {
+//   firstName: "Jonas",
+//   lastName: "Schmedtmann", 
+//   age: 2037 - 1991, 
+//   job: "teacher", 
+//   friends: ["Michael", "Peter", "Steven"], 
+// };
+
+// //Dot Noatation
+// console.log(jonas);
+// console.log(jonas.firstName);
+// console.log(jonas.lasttName);
+// console.log(jonas.age);
+
+// //Bracket Notation
+// console.log(jonas["firstName"]);
+// console.log(jonas["lastName"]);
+// console.log(jonas["age"]);
+
+
+// const nameKey = "Name";
+// console.log(jonas["first" + nameKey]);
+
+// // Both notations work for modification
+// jonas.job = "Programmer";
+// jonas["age"] = 35;
+// console.log(jonas);
+
+// // Add new properties 
+// jonas.location = "Philippines";
+// jonas["twitter"] = "@jonasschmedtman";
+// jonas.hasDriversLicense = true;
+// console.log(jonas);
+
+
+// // Ordered, indexed data - think lists
+// const listOfYears = [1991, 1984, 2008, 2020];
+// const shoppingList = ["apples", "bananas", "milk", "bread"];
+// const testScores = [85, 92, 78, 96];
+
+// // Objects
+// const person = {
+//   name: "Jonas",
+//   age: 46,
+//   occupation: "teacher",
+// };
+
+// const car = {
+//   brand: "Toyota",
+//   model: "Camry",
+//   year: 2020,
+//   color: "blue",
+// };
+
+// // Objects can contain arrays, arrays can contain objects
+// const student = {
+//   name: "Sarah",
+//   grades: [85, 92, 78], 
+//   address: {
+//     street: "123 Main St",
+//     city: "New York",
+//   },
+// };
+
+// console.log(student.grades[0]);
+// console.log(student.address.city);
+
+// ////////////////////////////////////
+// // Object Methods
+
+// const jonas = {
+//   firstName: "John",
+//   lastName: "Doe",
+//   birthYear: 1995,
+//   job: "teacher",
+//   friends: ["Michael", "Peter", "Steven"],
+//   hasDriversLicense: true,
+
+//   // Method - function inside object
+//   calcAge: function (birthYear) {
+//     return 2025 - birthYear;
+//   },
+// };
+
+// console.log(jonas.calcAge(2005));
+
+// // 'this' keyword
+// const jonasImproved = {
+//   firstName: "Jonas",
+//   lastName: "Schmedtmann",
+//   birthYear: 1995,
+//   job: "teacher",
+//   friends: ["Michael", "Peter", "Steven"],
+//   hasDriversLicense: true,
+
+//   calcAge: function () {
+//     this.age = 2025 - this.birthYear;
+//     return this.age;
+//   },
+
+//   getSummary: function () {
+//     return `${this.firstName} is a ${this.calcAge()}-year old ${
+//       this.job
+//     }, and he has ${this.hasDriversLicense ? "a" : "no"} driver's license.`;
+//   },
+// }
+
+// console.log(jonasImproved.calcAge());
+// console.log(jonasImproved.age);
+// console.log(jonasImproved.getSummary());
+
+
+////////////////////////////////////
+// Coding Challenge #3 - User Profile System
+
+const user = {
+  firstName: "Sarah",
+  lastName: "Johnson",
+  birthYear: 1995,
+  location: "New York",
+  interests: ["photography", "travel", "coding"],
+  friends: [
+    { name: "Michael", status: "active" },
+    { name: "Emma", status: "inactive" },
+    { name: "David", status: "active" },
+  ],
+  isActive: true,
+
+  // Calculate age method
+  calcAge: function () {
+    // Calculate age and store as this.age
+    // Hint: Use new Date().getFullYear() for current year
+    // Your code here
+    this.age = new Date(). getFullYear() - this.birthYear;
+    return this.age;
+  },
+
+  // Add friend method
+  addFriend: function (name, status = "active") {
+    // Add new friend object to this.friends array
+    // Return the new length of friends array
+    // Your code here
+    this.friends.push({name, status: status});
+    return this.friends.length;
+  },
+
+  // Get active friends count
+  getActiveFriends: function () {
+    const ActiveFriends = this.friends.filter(
+        (friend => friend.status === "active")
+    );
+    return ActiveFriends.length;
+  },
+
+  // Toggle active status
+  toggleStatus: function () {
+    this.isActive = !this.isActive;
+    return this.isActive;
+  },
+
+  // Generate profile summary
+  getSummary: function () {
+    const age = this.calcAge();
+    const activeFriends = this.getActiveFriends();
+    const status = this.active ? "active" : "away";
+
+    return `${this.firstName} ${this.lastName} (${age}) from ${this.location}
+    Currently ${status}
+    ${activeFriends} active friends out of ${this.friends.lengtj} total
+    Interest: ${this.interests.join(', ')}
+    Connected and sharing life's adventures`;
+    C
+  },
+};
+
+// Test your user profile system
+console.log(user.getSummary());
+user.addFriend("Alex", "active");
+user.toggleStatus();
+console.log(`\nAfter updates:`);
+console.log(user.getSummary());
 
