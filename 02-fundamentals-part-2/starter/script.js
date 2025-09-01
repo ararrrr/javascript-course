@@ -349,70 +349,166 @@
 ////////////////////////////////////
 // Coding Challenge #3 - User Profile System
 
-const user = {
-  firstName: "Sarah",
-  lastName: "Johnson",
-  birthYear: 1995,
-  location: "New York",
-  interests: ["photography", "travel", "coding"],
-  friends: [
-    { name: "Michael", status: "active" },
-    { name: "Emma", status: "inactive" },
-    { name: "David", status: "active" },
-  ],
-  isActive: true,
+// const user = {
+//   firstName: "Sarah",
+//   lastName: "Johnson",
+//   birthYear: 1995,
+//   location: "New York",
+//   interests: ["photography", "travel", "coding"],
+//   friends: [
+//     { name: "Michael", status: "active" },
+//     { name: "Emma", status: "inactive" },
+//     { name: "David", status: "active" },
+//   ],
+//   isActive: true,
 
-  // Calculate age method
-  calcAge: function () {
-    // Calculate age and store as this.age
-    // Hint: Use new Date().getFullYear() for current year
-    // Your code here
-    this.age = new Date(). getFullYear() - this.birthYear;
-    return this.age;
-  },
+//   // Calculate age method
+//   calcAge: function () {
+//     // Calculate age and store as this.age
+//     // Hint: Use new Date().getFullYear() for current year
+//     // Your code here
+//     this.age = new Date(). getFullYear() - this.birthYear;
+//     return this.age;
+//   },
 
-  // Add friend method
-  addFriend: function (name, status = "active") {
-    // Add new friend object to this.friends array
-    // Return the new length of friends array
-    // Your code here
-    this.friends.push({name, status: status});
-    return this.friends.length;
-  },
+//   // Add friend method
+//   addFriend: function (name, status = "active") {
+//     // Add new friend object to this.friends array
+//     // Return the new length of friends array
+//     // Your code here
+//     this.friends.push({name, status: status});
+//     return this.friends.length;
+//   },
 
-  // Get active friends count
-  getActiveFriends: function () {
-    const ActiveFriends = this.friends.filter(
-        (friend => friend.status === "active")
-    );
-    return ActiveFriends.length;
-  },
+//   // Get active friends count
+//   getActiveFriends: function () {
+//     const ActiveFriends = this.friends.filter(
+//         (friend => friend.status === "active")
+//     );
+//     return ActiveFriends.length;
+//   },
 
-  // Toggle active status
-  toggleStatus: function () {
-    this.isActive = !this.isActive;
-    return this.isActive;
-  },
+//   // Toggle active status
+//   toggleStatus: function () {
+//     this.isActive = !this.isActive;
+//     return this.isActive;
+//   },
 
-  // Generate profile summary
-  getSummary: function () {
-    const age = this.calcAge();
-    const activeFriends = this.getActiveFriends();
-    const status = this.active ? "active" : "away";
+//   // Generate profile summary
+//   getSummary: function () {
+//     const age = this.calcAge();
+//     const activeFriends = this.getActiveFriends();
+//     const status = this.active ? "active" : "away";
 
-    return `${this.firstName} ${this.lastName} (${age}) from ${this.location}
-    Currently ${status}
-    ${activeFriends} active friends out of ${this.friends.lengtj} total
-    Interest: ${this.interests.join(', ')}
-    Connected and sharing life's adventures`;
-    C
-  },
-};
+//     return `${this.firstName} ${this.lastName} (${age}) from ${this.location}
+//     Currently ${status}
+//     ${activeFriends} active friends out of ${this.friends.lengtj} total
+//     Interest: ${this.interests.join(', ')}
+//     Connected and sharing life's adventures`;
+//     C
+//   },
+// };
 
-// Test your user profile system
-console.log(user.getSummary());
-user.addFriend("Alex", "active");
-user.toggleStatus();
-console.log(`\nAfter updates:`);
-console.log(user.getSummary());
+// // Test your user profile system
+// console.log(user.getSummary());
+// user.addFriend("Alex", "active");
+// user.toggleStatus();
+// console.log(`\nAfter updates:`);
+// console.log(user.getSummary());
+
+////////////////////////////////////
+// Selecting DOM Elements
+
+// querySelector - works with any CSS selector
+// const message = document.querySelector(".message"); 
+// console.log(message);
+
+// const button = document.querySelector("#btn");
+// console.log(button);
+
+// const heading = document.querySelector("h1");
+// console.log(heading);
+
+// console.log(message.textContent);
+// console.log(button.id);
+// console.log(heading.tagName);
+// console.log(heading.textContent);
+ 
+// // getElementByID
+// const buttonByID = document.getElementById("btn");
+// console.log (buttonByID);
+// console.log(buttonByID === button);
+
+// // querySelectorAll - gets ALL matching elements
+// const allParagraphs = document.querySelectorAll("p");
+// console.log(allParagraphs);
+// console.log(allParagraphs[0]);
+// console.log(allParagraphs.length); 
+
+// Modifying Element Content
+
+const message = document.querySelector(".message");
+
+// textContent - gets/sets just the text, no HTML
+console.log(message.textContent);
+message.textContent = "Hello from JavaScript!";
+console.log(message.textContent);
+
+//innerHTML
+message.innerHTML = "<strong>Bold text from JS!</strong>";
+
+// innerText
+console.log(message.innerText);
+
+// Input Element Values
+const input = querySelector(".guess");
+
+console.log(input.value);
+input.value = "Default text";
+
+const heading = document.querySelector("h1");
+heading.style.color = "red";
+heading.style.backgroundColor = "yellow";
+heading.style.fontSize="3rem";
+
+const button = document.querySelector("#btn");
+button.style.padding = "20px";
+button.style.borderRadius = "10px";
+
+button.addEventListener("click", function() {
+  console.log('Button was clicked!');
+  message.textContent = "You clicked the button";
+  message.style.color = "green";
+});
+
+let clickCount = 0;
+button.addEventListener("click", function (){
+  clickCount++;
+  button.textContent = `Clicked ${clickCount} times`;
+  button.style.backgroundColor = `hsl (${clickCount * 30}, 70%, 50%)`;
+})
+
+// Input events
+const display = document.querySelector(".message");
+input.addEventListener("input", function () {
+    const userText = input.value;
+    display.textContent = `You typed ${userText}`;
+    display.style.fontSize = `${userText.length + 10}px`;
+});
+
+// keyboard events - respond to specific key
+input.addEventListener("keydown", function (event) {
+    console.log(`Key pressed ${event.key}`);
+
+    if (event.key === "Enter") {
+      display.textContent = `You pressed Enter! Text was ${input.value}`;
+      input.value = "";
+      
+    }
+});
+
+
+
+
+
 
