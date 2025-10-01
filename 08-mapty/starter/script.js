@@ -102,3 +102,96 @@ console.log(
   run1 instanceof Workout,
   cycling1 instanceof Workout
 );
+
+// Add this after your existing Workout classes from Hour 1
+
+console.log('=== TESTING GEOLOCATION API ===');
+
+
+// Test the geolocation
+
+_loadMap(position) {
+  const { latitude, longitude } = position.coords;
+  console.log(`Loading map at coordinates: ${latitude}, ${longitude}`);
+  // ✅ Correct: Leaflet expects an array [lat, lng]
+  const coords = [latitude, longitude];
+
+  const map = L.map('map').setView(coords, 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    attribution:
+      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(this.map);
+
+
+  // ✅ Marker also works with [lat, lng]
+  L.marker(coords).addTo(this.map).bindPopup('You are here!').openPopup();
+
+  //Dito iadd
+  this.#map.on('click', function (mapEvent) {
+    console.log('Map clicked!', mapEvent);
+    //Extract coordinate when we click
+    const { lat, lng } = mapEvent.latlng;
+    console.log(`Map clicked at: ${lat.toFixed(4)}, ${lng.toFixed(4)}`);
+
+    //create the marker na blue
+    L.marker([lat, lng])
+      .addTo(this.#map)
+      .bindPopup(
+        `Workout location<br>Lat: ${lat.toFixed(4)}, ${lng.toFixed(4)}`
+      )
+      .openPopup();
+  });
+
+  console.log('Map loaded successfully at user location');
+}
+
+class App {
+    #map;
+    #mapZoomLevel = 13;
+    #mapEvent;
+    #workouts = [];
+
+    constructor() {
+        console.log('App starting');
+        this._getPosition()
+    }
+    _getPosition() {
+  if (navigator.geolocation) {
+    console.log('🔍 Requesting user location...');
+    navigator.geolocation.getCurrentPosition(
+      this._loadMap.bind(this),
+      {
+        timeout: 10000,
+        enableHighAccuracy: true,
+        maximumAge: 600000,
+      }
+    );
+  } else {
+    alert('❌ Geolocation is not supported by this browser');
+  }
+}
+_handleLocationError(error) {
+        console.error('Geolocation error:', error);
+
+        let message = 'Could not get your position. ';
+
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            message +=
+              'Location access was denied. Please enable location services and refresh the page.';
+            break;
+          case error.POSITION_UNAVAILABLE:
+            message += 'Location information is unavailable.';
+            break;
+          case error.TIMEOUT:
+            message += 'Location request timed out.';
+            break;
+          default:
+            message += 'An unknown error occurred.';
+            break;
+        }
+
+        alert(`📍 ${message}`);
+      }
+}
